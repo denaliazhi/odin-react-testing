@@ -1,23 +1,22 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
-import App from "./App";
-
-describe("something truthy and falsy", () => {
-  it("true to be true", () => {
-    expect(true).toBe(true);
-  });
-
-  it("false to be false", () => {
-    expect(false).toBe(false);
-  });
-});
+import userEvent from "@testing-library/user-event";
+import App from "../src/App";
 
 describe("App", () => {
-  it("renders headline", () => {
-    render(<App title="React" />);
+  it("renders 'Sprinkles'", () => {
+    const { container } = render(<App />);
+    expect(container).toMatchSnapshot();
+  });
 
+  it("renders 'Chocolate'", async () => {
+    const user = userEvent.setup();
+
+    render(<App />);
+    const button = screen.getByRole("button", { name: "Change" });
+    await user.click(button);
     screen.debug();
 
-    // check if App components renders headline
+    expect(screen.getByRole("heading").textContent).toMatch(/Chocolate/i);
   });
 });
