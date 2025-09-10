@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Sample } from "./components/Sample";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,8 @@ function App() {
       >
         Change
       </button>
+
+      <Sample></Sample>
     </>
   );
 }
